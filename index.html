@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Binary Search Visualization</title>
+  <style>
+    p{
+      margin-bottom: 2px;
+    }
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    #controls {
+      margin-bottom: 15px;
+    }
+    #userInput {
+      width: 400px;
+      padding: 5px;
+    }
+    #targetInput {
+      width: 100px;
+      padding: 5px;
+      margin-left: 5px;
+    }
+    button {
+      padding: 6px 12px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+    select{
+      padding: 6px 12px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="color: white;">BINARY SEARCH</h1>
+  <div id="controls">
+    <input type="text" id="userInput" placeholder="Sorted array like 1,3,5,7,9,11,13,15" />
+    <input type="text" id="targetInput" placeholder="Target" />
+    <br>
+    <p style="color: white;">Sample input: 1,2,4,6,8,10,12,14,16,18,20 | Target: 10</p>
+    <br>
+    <button onclick="getInput()">Run</button>
+    <button onclick="reloadPage()">Reset</button>
+    <button onclick="randomiseInput()">Randomise Input</button>
+    <select id="selectedInput">
+      <option id="s5">
+        5
+      </option>
+      <option id="s7">
+        7
+      </option>
+      <option id="s10" selected>
+        10
+      </option>
+      <option id="s12">
+        12
+      </option>
+      <option id="s15">
+        15
+      </option>
+      <option id="s20">
+        20
+      </option>
+    </select>
+  </div>
+  <canvas id="canvas" width="1300" height="800"></canvas>
+  <script src="index.js"></script>
+</body>
+</html>
