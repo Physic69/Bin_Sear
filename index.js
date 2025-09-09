@@ -184,6 +184,10 @@ function binarySearch() {
       currentMid = -1;
       drawArray();
       
+      setTimeout(() => {
+        alert(`Target ${target} was not found in the array! Total steps: ${stepCounter}`);
+      }, 500);
+      
       ctx.fillStyle = 'red';
       ctx.font = "24px Arial";
       ctx.textAlign = "center";
