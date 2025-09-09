@@ -176,20 +176,27 @@ function binarySearch() {
   
   function step() {
     if (left > right) {
-      // Target not found
+      currentLeft = -1;
+      currentRight = -1;
+      currentMid = -1;
+      drawArray();
+      
       ctx.fillStyle = 'red';
       ctx.font = "24px Arial";
       ctx.textAlign = "center";
       ctx.fillText(`Target ${target} NOT FOUND!`, canvas.width / 2, 350);
       
-      currentLeft = -1;
-      currentRight = -1;
-      currentMid = -1;
-      drawArray();
+      // Add a visual indication
+      ctx.fillStyle = 'red';
+      ctx.font = "16px Arial";
+      ctx.fillText(`Search completed - target not in array`, canvas.width / 2, 380);
+      
       isSearching = false;
+      console.log(`Target ${target} not found in the array`); 
       return;
     }
     
+
     currentLeft = left;
     currentRight = right;
     currentMid = Math.floor((left + right) / 2);
