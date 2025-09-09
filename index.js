@@ -14,6 +14,7 @@ let currentLeft = -1;
 let currentRight = -1;
 let currentMid = -1;
 let isSearching = false;
+let stepCounter = 0;
 
 class SearchElement {
   constructor(value, index) {
@@ -115,13 +116,11 @@ function drawArray() {
     drawElement(element, color, textColor);
   });
   
-  // Draw target info
   ctx.fillStyle = 'white';
   ctx.font = "18px Arial";
   ctx.textAlign = "left";
   ctx.fillText(`Target: ${target}`, 50, 100);
   
-  // Draw pointers info
   if (currentLeft !== -1) {
     ctx.fillText(`Left: ${currentLeft}`, 50, 130);
   }
@@ -132,6 +131,9 @@ function drawArray() {
     ctx.fillText(`Mid: ${currentMid}`, 250, 130);
     ctx.fillText(`Mid Value: ${numberArray[currentMid].value}`, 320, 130);
   }
+  
+  ctx.fillStyle = 'cyan';
+  ctx.fillText(`Steps: ${stepCounter}`, 500, 130);
 }
 
 function getInput() {
@@ -173,6 +175,7 @@ function binarySearch() {
   let right = numberArray.length - 1;
   let found = false;
   isSearching = true;
+  stepCounter = 0; 
   
   function step() {
     if (left > right) {
@@ -186,24 +189,23 @@ function binarySearch() {
       ctx.textAlign = "center";
       ctx.fillText(`Target ${target} NOT FOUND!`, canvas.width / 2, 350);
       
-      // Add a visual indication
       ctx.fillStyle = 'red';
       ctx.font = "16px Arial";
       ctx.fillText(`Search completed - target not in array`, canvas.width / 2, 380);
+      ctx.fillText(`Total Steps: ${stepCounter}`, canvas.width / 2, 410);
       
       isSearching = false;
       console.log(`Target ${target} not found in the array`); 
       return;
     }
     
-
     currentLeft = left;
     currentRight = right;
     currentMid = Math.floor((left + right) / 2);
+    stepCounter++; 
     
     drawArray();
     
-    // Draw comparison arrows and text
     ctx.fillStyle = 'white';
     ctx.font = "16px Arial";
     ctx.textAlign = "center";
@@ -211,27 +213,26 @@ function binarySearch() {
     const midValue = numberArray[currentMid].value;
     
     if (midValue === target) {
-      // Found the target
       setTimeout(() => {
         ctx.fillStyle = 'green';
         ctx.font = "24px Arial";
         ctx.fillText(`Target ${target} FOUND at index ${currentMid}!`, canvas.width / 2, 350);
+        ctx.fillText(`Total Steps: ${stepCounter}`, canvas.width / 2, 380);
         
-        // Highlight found element
         drawElement(numberArray[currentMid], 'green', 'white');
         isSearching = false;
       }, 800);
       return;
     } else if (midValue < target) {
       ctx.fillStyle = 'orange';
-      ctx.fillText(`${midValue} < ${target}, search right half`, canvas.width / 2, 320);
+      ctx.fillText(`Step ${stepCounter}: ${midValue} < ${target}, search right half`, canvas.width / 2, 320);
       setTimeout(() => {
         left = currentMid + 1;
         step();
       }, 1500);
     } else {
       ctx.fillStyle = 'orange';
-      ctx.fillText(`${midValue} > ${target}, search left half`, canvas.width / 2, 320);
+      ctx.fillText(`Step ${stepCounter}: ${midValue} > ${target}, search left half`, canvas.width / 2, 320);
       setTimeout(() => {
         right = currentMid - 1;
         step();
@@ -241,6 +242,7 @@ function binarySearch() {
   
   setTimeout(step, 500);
 }
+
 
 // Initialize with a sample
 window.onload = function() {
